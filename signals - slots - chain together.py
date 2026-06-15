@@ -1,0 +1,48 @@
+from random import choice
+
+from PyQt6.QtWidgets import QApplication, QPushButton, QMainWindow
+
+window_titles = [
+    "My App",
+    "Still My App",
+    "What on earth",
+    "This is surprising",
+    "Something went wrong"
+]
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.n_times_clicked = 0
+
+        self.setWindowTitle("My App")
+
+        self.button = QPushButton("Click Me")
+        self.button.clicked.connect(self.the_button_was_clicked)
+
+        # hook the custom slot method the_window_title_changed to the wondows.windowTitleChanged signal
+        # windowTitleChange only fires if the new title is a CHANGE from the previous one
+        # ******* IMPORTANT - check the conditions under which a signal fires ***********************
+        self.windowTitleChanged.connect(self.the_window_title_changed)
+
+        self.setCentralWidget(self.button)
+
+    def the_button_was_clicked(self):
+        print("Clicked!")
+        new_window_title = choice(window_titles)
+        print(f"Setting title: {new_window_title}")
+        self.setWindowTitle(new_window_title)
+
+    def the_window_title_changed(self, window_title):
+        print(f"Window title changed: {window_title}")
+
+        if window_title == "Something went wrong":
+            self.button.setDisabled(True)
+
+app = QApplication([])
+
+window = MainWindow()
+window.show()
+
+app.exec()
