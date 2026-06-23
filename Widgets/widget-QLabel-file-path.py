@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("My App")
 
         widget = QLabel("Hello")
-        widget.setPixmap(QPixmap(os.path.join(basedir, "images/otje.jpg")))
+        widget.setPixmap(QPixmap(os.path.join(basedir, "../images/otje.jpg")))
 
         self.setCentralWidget(widget)
 

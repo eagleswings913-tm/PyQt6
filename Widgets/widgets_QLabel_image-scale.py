@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
 
         widget = QLabel("Hello")
         # tag::scaledContents[]
-        widget.setPixmap(QPixmap(os.path.join(basedir, "images/otje.jpg")))
+        widget.setPixmap(QPixmap(os.path.join(basedir, "../images/otje.jpg")))
         widget.setScaledContents(True)
         # end::scaledContents[]
 
